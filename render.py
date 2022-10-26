@@ -4,7 +4,8 @@ from polygon import Polygon
 import numpy as np
 
 
-def Render(polygons, display, theta, setting, animation=0, stereo=True, showSphere=True, showStereo=True, showlines=True, showvertices=True):
+def Render(polygons, display, theta, setting, animation=0, stereo=True, showSphere=True, showStereo=True, showlines=True, showvertices=True, transitionAnimation=False):
+    
     for polygon in polygons:
         previous_vertex = None
         previous_projection = None
@@ -26,8 +27,15 @@ def Render(polygons, display, theta, setting, animation=0, stereo=True, showSphe
 
             stereo_projection = StereographicProjection(
                 None, None, vertex, projected_scale)
+
             s_x = stereo_projection[0] + setting.width//2
             s_y = stereo_projection[1] + setting.height//2
+            
+
+            # interpolation animation of sphere transition to projection
+            # enable the two lines bellow to see a cool transition
+            # x = Lerp(x, s_x, animation)
+            # y = Lerp(y, s_y, animation)
 
             
             if previous_vertex and showSphere and showlines :
@@ -39,7 +47,7 @@ def Render(polygons, display, theta, setting, animation=0, stereo=True, showSphe
                     pygame.draw.line(display, setting.yellow,
                                     (x, y), previous_vertex, 2)
 
-            if previous_projection and showStereo and showlines:
+            if previous_projection and showStereo and showlines :
                 
                 if index % 2 == 0:
                     pygame.draw.line(display, setting.blue,

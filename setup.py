@@ -20,6 +20,7 @@ showSphereText = TextUI(
 
 
 showLines = ToggleButton()
+showLines.state = False
 showLines.position = (
     StereographicButton.position[0] + 170, StereographicButton.position[1]+200)
 showLinesText = TextUI(

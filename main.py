@@ -26,6 +26,7 @@ prev = None
 animation = 0
 showUI = False
 stereoButton = False
+transitionAnimation = False
 
 run = True
 while run:
@@ -43,6 +44,9 @@ while run:
                 run = False
             if event.key == pygame.K_SPACE:
                 showUI = not showUI
+            if event.key == pygame.K_s:
+                transitionAnimation = True
+                animation = 0
         if event.type == pygame.MOUSEBUTTONUP:
             if event.button == 1:
                 mouseclicked = True
@@ -52,7 +56,9 @@ while run:
                           0], 0,  setting.width, 0, 2 * setting.PI)
 
     Render(polygons=sphereMesh, display=display,
-           theta=theta, setting=setting, animation=animation, stereo=stereoButton, showSphere=ShowSphereButton.state, showStereo=ShowStereoButton.state, showlines=showLines.state, showvertices=showVertices.state)
+           theta=theta, setting=setting, animation=animation, stereo=True, 
+           showSphere=ShowSphereButton.state, showStereo=ShowStereoButton.state, 
+           showlines=showLines.state, showvertices=showVertices.state, transitionAnimation=transitionAnimation)
 
     if showUI:
         panel.Render(display)
@@ -75,6 +81,7 @@ while run:
     animation += 0.02
     if animation > 1:
         animation = 1
+        transitionAnimation = False
     pygame.display.update()
 
 pygame.quit()
