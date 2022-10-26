@@ -1,6 +1,7 @@
 import pygame
-from setting import *
+from setting import Setting, Translate
 from utils import *
+from setup import *
 from render import Render
 
 setting = Setting()
@@ -22,58 +23,58 @@ for polygon in sphereMesh:
 
 theta = 0
 prev = None
+animation = 0
+showUI = False
+stereoButton = False
 
 run = True
 while run:
     display.fill(setting.black)
     clock.tick(setting.fps)
     frame_rate = int(clock.get_fps())
-    pygame.display.set_caption("Stereographic projection : fps: {0}".format(frame_rate))
-
+    pygame.display.set_caption(
+        "Stereographic projection : fps: {0}".format(frame_rate))
+    mouseclicked = False
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_ESCAPE:
                 run = False
+            if event.key == pygame.K_SPACE:
+                showUI = not showUI
+        if event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1:
+                mouseclicked = True
 
-    # for index, vtx in enumerate(sphereMesh):
-    #     vertex = np.matmul(xRot(theta), vtx.ToMatrix())
-    #     vertex = np.matmul(yRot(theta), vertex)
+    if pygame.mouse.get_pressed(3)[0]:
+        theta = Translate(pygame.mouse.get_pos()[
+                          0], 0,  setting.width, 0, 2 * setting.PI)
 
-    #     vertex = MatrixToVertex(vertex)
-    #     v = vertex.translatetoScreen(-1, 1, 0, 200)
-    #     pygame.draw.circle(display, white, (v.x  + width//2 - 100, v.y + height //2 - 100), 2)
+    Render(polygons=sphereMesh, display=display,
+           theta=theta, setting=setting, animation=animation, stereo=stereoButton, showSphere=ShowSphereButton.state, showStereo=ShowStereoButton.state, showlines=showLines.state, showvertices=showVertices.state)
 
-    #     if index > 0 and index < len(sphereMesh)-1:
-    #         x, y = StereographicProjection(None, None, vertex)
-    #         # pygame.draw.circle(display, (100, 100, 100), (x + width//2 , y + height//2), 1)
-    
-    # for index, tgl in enumerate(triangles):
-        
-    #     v1 = np.matmul(xRot(theta), tgl.v1.ToMatrix())
-    #     v2 = np.matmul(xRot(theta), tgl.v2.ToMatrix())
-    #     v3 = np.matmul(xRot(theta), tgl.v3.ToMatrix())
+    if showUI:
+        panel.Render(display)
+        StereographicButton.Render(display, mouseclicked, True)
 
-    #     v1 = MatrixToVertex(v1)
-    #     v2 = MatrixToVertex(v2)
-    #     v3 = MatrixToVertex(v3)
+        ShowStereoButton.Render(display, mouseclicked)
+        ShowSphereButton.Render(display, mouseclicked)
+        showLines.Render(display, mouseclicked)
+        showVertices.Render(display, mouseclicked)
 
-    #     vertex1 = v1.translatetoScreen(-1, 1, 0, 200)
-    #     vertex2 = v2.translatetoScreen(-1, 1, 0, 200)
-    #     vertex3 = v3.translatetoScreen(-1, 1, 0, 200)
-        
-    #     pygame.draw.circle(display, white, (vertex1.x  + width//2 - 100, vertex1.y + height //2 - 100), 2)
-    #     pygame.draw.circle(display, white, (vertex2.x  + width//2 - 100, vertex2.y + height //2 - 100), 2)
-    #     pygame.draw.circle(display, white, (vertex3.x  + width//2 - 100, vertex3.y + height //2 - 100), 2)
+        showStereoText.Render(display)
+        showSphereText.Render(display)
+        showLinesText.Render(display)
+        showVerticesText.Render(display)
 
-    #     pygame.draw.line(display, white, (vertex1.x  + width//2 - 100, vertex1.y + height //2 - 100), (vertex2.x  + width//2 - 100, vertex2.y + height //2 - 100), 2)
-    #     pygame.draw.line(display, white, (vertex1.x  + width//2 - 100, vertex1.y + height //2 - 100), (vertex3.x  + width//2 - 100, vertex3.y + height //2 - 100), 2)
-    #     pygame.draw.line(display, white, (vertex3.x  + width//2 - 100, vertex3.y + height //2 - 100), (vertex2.x  + width//2 - 100, vertex2.y + height //2 - 100), 2)
-
-    Render( polygons=sphereMesh , display=display, theta=theta, setting=setting)
+    stereoButton = StereographicButton.state
+    StereographicButton.state = False
 
     theta += 0.01
+    animation += 0.02
+    if animation > 1:
+        animation = 1
     pygame.display.update()
 
 pygame.quit()

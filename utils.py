@@ -88,10 +88,16 @@ def GenerateUVSphere(n, k):
     return polygons
 
 def StereographicProjection(N, S, vertex, scale=1):
-    x = ( vertex.x)/(1-vertex.z)
-    y = ( vertex.y)/(1-vertex.z)
+    x =  vertex.x/(1-vertex.z)
+    y =  vertex.y/(1-vertex.z)
 
     return (x * scale, y * scale)
 
 def Lerp(a, b, t):
-    return a + (b-a) * t
+    return a + (b - a) * t
+
+def EaseInOut(t):
+    if t <= 0.5:
+        return 2*t*t
+    t -= 0.5
+    return 2 * t * (1-t) + 0.5
