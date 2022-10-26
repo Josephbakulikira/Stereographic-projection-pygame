@@ -9,11 +9,13 @@ def Render(polygons, display, theta, setting, animation=0, stereo=True, showSphe
         previous_vertex = None
         previous_projection = None
         for index, vertex in enumerate(polygon.vertices):
+            # apply rotation matrices
             vertex = np.matmul(yRot(theta), vertex.ToMatrix())
-            # vertex = np.matmul(yRot(theta), vertex)
+            # vertex = np.matmul(zRot(theta), vertex)
+            # vertex = np.matmul(xRot(theta), vertex)
             vertex = MatrixToVertex(vertex)
 
-            sphere_scale = 200
+            sphere_scale = 300
             v = vertex.translatetoScreen(-1, 1, 0, sphere_scale)
             # add screen offsets
             x = v.x + setting.width // 2 - sphere_scale//2
@@ -27,7 +29,8 @@ def Render(polygons, display, theta, setting, animation=0, stereo=True, showSphe
             s_x = stereo_projection[0] + setting.width//2
             s_y = stereo_projection[1] + setting.height//2
 
-            if previous_vertex and showSphere and showlines:
+            
+            if previous_vertex and showSphere and showlines :
                 
                 if index % 2:
                     pygame.draw.line(display, setting.blue,
@@ -40,16 +43,16 @@ def Render(polygons, display, theta, setting, animation=0, stereo=True, showSphe
                 
                 if index % 2 == 0:
                     pygame.draw.line(display, setting.blue,
-                                    (s_x, s_y), previous_projection, 1)
+                                    (s_x, s_y), previous_projection, 2)
                 else:
                     pygame.draw.line(display, setting.yellow,
-                                     (s_x, s_y), previous_projection, 1)
+                                     (s_x, s_y), previous_projection, 2)
             previous_vertex = (x, y)
             previous_projection = (s_x, s_y)
 
             # draw projected vertices
             if showStereo and showvertices:
-                pygame.draw.circle(display, setting.white, (s_x, s_y), 1)
+                pygame.draw.circle(display, setting.color1, (s_x, s_y), 3)
             # draw vertices
             if showSphere and showvertices:
-                pygame.draw.circle(display, setting.white, (x, y), 1)
+                pygame.draw.circle(display, setting.color1, (x, y), 3)

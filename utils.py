@@ -88,6 +88,8 @@ def GenerateUVSphere(n, k):
     return polygons
 
 def StereographicProjection(N, S, vertex, scale=1):
+    if vertex.z == 0:
+        return (vertex.x, vertex.y)
     x =  vertex.x/(1-vertex.z)
     y =  vertex.y/(1-vertex.z)
 

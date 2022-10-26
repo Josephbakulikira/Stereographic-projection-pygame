@@ -5,9 +5,13 @@ class Setting:
         self.height = 1080
         self.black = (0, 0, 0)
         self.white = (255, 255, 255)
-        self.yellow = (200, 150, 20)
-        self.blue = (89, 120, 250)
-        self.fps = 60
+        self.yellow = (255, 212, 71)
+        self.blue = (106, 165, 225)
+        self.color1 = (248, 239, 197)
+        self.color2 = (0, 129, 138)
+        self.cyan = (145, 255, 204)
+        self.orange = (255, 171, 140)
+        self.fps = 30
         self.PI = 3.14159265359
         self.TAU = self.PI * 2
 
