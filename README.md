@@ -1,5 +1,7 @@
 # Stereographic-projection-pygame
 
+checkout my youtube Channel : [Auctux](https://www.youtube.com/c/Auctux)
+
 ## simple stereographic projection with python
 
 ### COMMANDS
