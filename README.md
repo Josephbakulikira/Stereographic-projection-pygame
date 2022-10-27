@@ -1,8 +1,8 @@
 # Stereographic-projection-pygame
 
+### Support
 checkout my youtube Channel : [Auctux](https://www.youtube.com/c/Auctux)
-
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/auctux)
+<a href='https://ko-fi.com/S6S64434Q' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 ## simple stereographic projection with python
 
