@@ -5,8 +5,9 @@ checkout my youtube Channel : [Auctux](https://www.youtube.com/c/Auctux)
 ## simple stereographic projection with python
 
 ### Requirements
-> pygame : pip install pygame
-> numpy : pip install numpy
+> **pygame** : pip install pygame
+
+> **numpy** : pip install numpy
 
 ### COMMANDS
 ```
