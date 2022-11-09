@@ -3,8 +3,10 @@ from utils import *
 from polygon import Polygon
 import numpy as np
 
-
-def Render(polygons, display, theta, setting, animation=0, stereo=True, showSphere=True, showStereo=True, showlines=True, showvertices=True, transitionAnimation=False):
+def Render(polygons, display, theta, setting, animation=0,
+             showSphere=True, showStereo=True, 
+            showlines=True, showvertices=True,showSphereLines=False, showVerticesSphere=False,
+             stereo_button=False, inverse_button=False):
     
     for polygon in polygons:
         previous_vertex = None
@@ -25,20 +27,26 @@ def Render(polygons, display, theta, setting, animation=0, stereo=True, showSphe
             # Stereographic projection
             projected_scale = sphere_scale//2
 
-            stereo_projection = StereographicProjection(
-                None, None, vertex, projected_scale)
+            stereo_projection = StereographicProjection(vertex, projected_scale)
 
             s_x = stereo_projection[0] + setting.width//2
             s_y = stereo_projection[1] + setting.height//2
             
-
+            # Here is how you can use the inverse Stereographic projection
+            # inverse_projection = InverseStereographicProject(Vertex(stereo_projection[0], stereo_projection[1], -1), projected_scale)
+           
             # interpolation animation of sphere transition to projection
-            # enable the two lines bellow to see a cool transition
-            # x = Lerp(x, s_x, animation)
-            # y = Lerp(y, s_y, animation)
+            # transition animation sphere -> projection
+            if stereo_button:
+                x = Lerp(x, s_x, animation)
+                y = Lerp(y, s_y, animation)
+            #  transition animation projection -> sphere
+            if inverse_button:
+                s_x = Lerp(s_x, x, animation)
+                s_y = Lerp(s_y, y, animation)
 
             
-            if previous_vertex and showSphere and showlines :
+            if previous_vertex and showSphere and showSphereLines :
                 
                 if index % 2:
                     pygame.draw.line(display, setting.blue,
@@ -51,16 +59,16 @@ def Render(polygons, display, theta, setting, animation=0, stereo=True, showSphe
                 
                 if index % 2 == 0:
                     pygame.draw.line(display, setting.blue,
-                                    (s_x, s_y), previous_projection, 2)
+                                    (s_x, s_y), previous_projection, 1)
                 else:
                     pygame.draw.line(display, setting.yellow,
-                                     (s_x, s_y), previous_projection, 2)
+                                     (s_x, s_y), previous_projection, 1)
             previous_vertex = (x, y)
             previous_projection = (s_x, s_y)
 
             # draw projected vertices
             if showStereo and showvertices:
-                pygame.draw.circle(display, setting.color1, (s_x, s_y), 3)
+                pygame.draw.circle(display, setting.color1, (s_x, s_y), 2)
             # draw vertices
-            if showSphere and showvertices:
-                pygame.draw.circle(display, setting.color1, (x, y), 3)
+            if showSphere and showVerticesSphere:
+                pygame.draw.circle(display, setting.color1, (x, y), 2)

@@ -54,7 +54,7 @@ class Button:
         screen.blit(text, textRect)
 
 class Panel:
-    def __init__(self, position = (width-400, 80), w= 385, h= 400, color=(248, 177, 149), alpha=50):
+    def __init__(self, position = (width-400, 80), w= 385, h= 400, color=(148, 177, 249), alpha=50):
         self.position = position
         self.w = w
         self.h = h
@@ -69,7 +69,7 @@ class Panel:
         #pygame.draw.rect(screen, self.color, pygame.Rect(self.position[0], self.position[1], self.w, self.h))
 
 class ToggleButton:
-    def __init__(self, position= ((width-200, 400)), w = 30, h=30, state=False, color=(20, 40, 50), activeColor=(240, 140, 200)):
+    def __init__(self, position= ((width-200, 400)), w = 30, h=30, state=False, color=(50, 50, 50), activeColor=(140, 250,130)):
         self.position = position
         self.w = w
         self.h = h

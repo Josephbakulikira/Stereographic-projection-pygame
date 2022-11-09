@@ -26,7 +26,9 @@ prev = None
 animation = 0
 showUI = False
 stereoButton = False
+inverseButton = False
 transitionAnimation = False
+sphere_is_projected = False
 
 run = True
 while run:
@@ -47,6 +49,12 @@ while run:
             if event.key == pygame.K_s:
                 transitionAnimation = True
                 animation = 0
+            if event.key == pygame.K_a:
+                animation = 0
+                stereoButton = not stereoButton
+            if event.key == pygame.K_s:
+                animation = 0
+                inverseButton = not inverseButton
         if event.type == pygame.MOUSEBUTTONUP:
             if event.button == 1:
                 mouseclicked = True
@@ -56,32 +64,39 @@ while run:
                           0], 0,  setting.width, 0, 2 * setting.PI)
 
     Render(polygons=sphereMesh, display=display,
-           theta=theta, setting=setting, animation=animation, stereo=True, 
-           showSphere=ShowSphereButton.state, showStereo=ShowStereoButton.state, 
-           showlines=showLines.state, showvertices=showVertices.state, transitionAnimation=transitionAnimation)
+           theta=theta, setting=setting, animation=animation,
+           showSphere=ShowSphereButton.state, showStereo=ShowStereoButton.state,
+           showlines=showLines.state, showvertices=showVertices.state, showSphereLines = showLinesSphere.state,
+           showVerticesSphere=showVerticesSphere.state, 
+           stereo_button=stereoButton, inverse_button=inverseButton)
 
     if showUI:
         panel.Render(display)
-        StereographicButton.Render(display, mouseclicked, True)
+        StereographicButton.Render(display)
+        StereographicButtonInverse.Render(display)
 
-        ShowStereoButton.Render(display, mouseclicked)
+        # ShowStereoButton.Render(display, mouseclicked)
         ShowSphereButton.Render(display, mouseclicked)
         showLines.Render(display, mouseclicked)
         showVertices.Render(display, mouseclicked)
+        showVerticesSphere.Render(display, mouseclicked)
+        showLinesSphere.Render(display, mouseclicked)
 
-        showStereoText.Render(display)
+        # showStereoText.Render(display)
         showSphereText.Render(display)
         showLinesText.Render(display)
         showVerticesText.Render(display)
+        ShowVerticesSphereText.Render(display)
+        showLinesSphereText.Render(display)
 
-    stereoButton = StereographicButton.state
-    StereographicButton.state = False
 
     theta += 0.01
     animation += 0.02
     if animation > 1:
         animation = 1
         transitionAnimation = False
+
+    sphere_is_projected = True
     pygame.display.update()
 
 pygame.quit()

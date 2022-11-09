@@ -4,29 +4,34 @@ from polygon import Polygon
 import math
 import numpy as np
 
+
 def xRot(theta):
     return np.array([
-    [1, 0, 0],
-    [0, math.cos(theta), -math.sin(theta)],
-    [0, math.sin(theta), math.cos(theta)]
+        [1, 0, 0],
+        [0, math.cos(theta), -math.sin(theta)],
+        [0, math.sin(theta), math.cos(theta)]
     ])
+
 
 def yRot(theta):
     return np.array([
-    [math.cos(theta), 0, math.sin(theta)],
-    [0, 1, 0],
-    [-math.sin(theta), 0, math.cos(theta)]
+        [math.cos(theta), 0, math.sin(theta)],
+        [0, 1, 0],
+        [-math.sin(theta), 0, math.cos(theta)]
     ])
+
 
 def zRot(theta):
     return np.array([
-    [math.cos(theta), -math.sin(theta), 0],
-    [math.sin(theta), math.cos(theta), 0],
-    [0, 0, 1]
+        [math.cos(theta), -math.sin(theta), 0],
+        [math.sin(theta), math.cos(theta), 0],
+        [0, 0, 1]
     ])
+
 
 def MatrixToVertex(mat):
     return Vertex(mat[0][0], mat[1][0], mat[2][0])
+
 
 def GenerateUVSphere(n, k):
     vertices = []
@@ -52,7 +57,7 @@ def GenerateUVSphere(n, k):
     for i in range(n):
         # North polygons
         index_0 = i + 1
-        index_1 = ( i + 1) % n + 1
+        index_1 = (i + 1) % n + 1
         North = Polygon()
         North.vertices.append(north_pole)
         North.vertices.append(vertices[index_0])
@@ -84,19 +89,26 @@ def GenerateUVSphere(n, k):
 
             polygons.append(quad)
 
-
     return polygons
 
-def StereographicProjection(N, S, vertex, scale=1):
-    if vertex.z == 0:
-        return (vertex.x, vertex.y)
-    x =  vertex.x/(1-vertex.z)
-    y =  vertex.y/(1-vertex.z)
 
+def StereographicProjection(vertex, scale=1):
+    x = 2 * vertex.x/(1-vertex.z)
+    y = 2 * vertex.y/(1-vertex.z)
     return (x * scale, y * scale)
+
+
+def InverseStereographicProject(vertex, scale):
+    x = (4 * vertex.x) / (vertex.x ** 2 + vertex.y ** 2 + 4)
+    y = (4 * vertex.y) / (vertex.x ** 2 + vertex.y ** 2 + 4)
+    z = (vertex.x ** 2 + vertex.y ** 2 - 4) / (vertex.x ** 2 + vertex.y ** 2 + 4)
+
+    return (x/scale, y/scale, z)
+
 
 def Lerp(a, b, t):
     return a + (b - a) * t
+
 
 def EaseInOut(t):
     if t <= 0.5:
