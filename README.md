@@ -14,11 +14,11 @@ checkout my youtube Channel : [Auctux](https://www.youtube.com/c/Auctux)
 
 ### COMMANDS
 ***
-** ESC ** close the window
-** SPACE ** toggle UI panel
-** hold Mouse left Button down ** and move the mouse to rotate The sphere
-Press ** S ** to toggle transition animation from sphere to projection
-Press ** I ** to toggle transiton animation from projection to sphere (Inverse)
+- ` ESC ` close the window
+- ` SPACE ` toggle UI panel
+- ` hold Mouse left Button down ` and move the mouse to rotate The sphere
+- Press ` S ` to toggle transition animation from sphere to projection
+- Press ` I ` to toggle transiton animation from projection to sphere (Inverse)
 ***
 
 ### issues & Bugs
