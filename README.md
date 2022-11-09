@@ -1,8 +1,16 @@
 # Stereographic-projection-pygame
 
+### Support
 checkout my youtube Channel : [Auctux](https://www.youtube.com/c/Auctux)
 
+<!-- <a href='https://ko-fi.com/S6S64434Q' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a> -->
+
 ## simple stereographic projection with python
+
+### Requirements
+> **pygame** : pip install pygame
+
+> **numpy** : pip install numpy
 
 ### COMMANDS
 ```
