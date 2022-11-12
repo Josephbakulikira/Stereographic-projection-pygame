@@ -93,6 +93,9 @@ def GenerateUVSphere(n, k):
 
 
 def StereographicProjection(vertex, scale=1):
+    if 1-vertex.z == 0:
+        return (vertex.x, vertex.y)
+        
     x = 2 * vertex.x/(1-vertex.z)
     y = 2 * vertex.y/(1-vertex.z)
     return (x * scale, y * scale)
