@@ -24,7 +24,7 @@ checkout my youtube Channel : [Auctux](https://www.youtube.com/c/Auctux)
 ### issues & Bugs
 - This code need a lot of optimization
 - Some refactoring
-- Using Quaternions
+- maybe also implementing Quaternions can help
 
 ![Screenshot (404)](https://user-images.githubusercontent.com/48150537/198124705-d5c80080-a6f6-4f30-b8f1-93b570b6e8e5.png)
 ![Screenshot (407)](https://user-images.githubusercontent.com/48150537/198124478-66b184ca-a2c3-41fd-af54-8c8993aa821f.png)
